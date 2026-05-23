@@ -3,7 +3,14 @@
     "allow": [
       "Bash(pnpm install *)",
       "Bash(pnpm -r exec node -e \"console.log\\(process.cwd\\(\\)\\)\")",
-      "Bash(pnpm why *)"
+      "Bash(pnpm why *)",
+      "Bash(pnpm add *)",
+      "Bash(pnpm typecheck *)",
+      "Bash(pnpm lint *)",
+      "Bash(pnpm format:check)",
+      "Bash(pnpm exec *)",
+      "Bash(pnpm --filter @adaptive-hover/core typecheck)",
+      "Bash(pnpm --filter @adaptive-hover/react typecheck)"
     ]
   }
 }

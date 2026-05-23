@@ -79,4 +79,4 @@ calculateLayout({
 
 ## 完成记录
 
-<!-- 完成后在此追加 -->
+- 2026-05-23：按文档第 6.4 节完整实现，无偏离决定。`pnpm --filter @adaptive-hover/core typecheck` 通过。

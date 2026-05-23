@@ -74,3 +74,10 @@ pnpm --filter @adaptive-hover/react typecheck
 ## 完成记录
 
 <!-- 完成后在此追加 -->
+
+### 2026-05-23
+
+- 按参考实现框架原样落地 `Portal.tsx`，未做扩展。
+- `packages/react/package.json` devDependencies 添加 `react@^19.2.6`、`react-dom@^19.2.6`、`@types/react@^19.2.4`、`@types/react-dom@^19.2.2`（与 lockfile 中已解析的 react 19.2.6 对齐），peerDeps 保持 `>=18`。
+- `packages/react/src/index.ts` 由空 `export {}` 改为 `export { Portal } from './Portal'`，否则 `tsc --noEmit` 在 `include: ["src"]` 下不会真正校验 Portal.tsx。
+- SSR 烟雾验证：在包根创建 `__ssr_smoke.ts` 用 `renderToString` 调用，输出空字符串、未抛错；验证后已删除。

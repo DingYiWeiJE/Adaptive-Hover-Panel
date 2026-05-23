@@ -13,18 +13,18 @@
 | 状态 | 编号 | 任务                                | 依赖             | 完成日期 |
 | ---- | ---- | ----------------------------------- | ---------------- | -------- |
 | [x]  | T01  | [Monorepo 骨架](tasks/T01-monorepo-skeleton.md)                          | —                | 2026-05-23 |
-| [ ]  | T02  | [公共配置（tsconfig/lint/format）](tasks/T02-shared-config.md)            | T01              |          |
-| [ ]  | T03  | [Core：类型 + 常量 + clamp](tasks/T03-core-types-utils.md)                | T02              |          |
-| [ ]  | T04  | [Core：calculateLayout 算法](tasks/T04-core-calculate-layout.md)          | T03              |          |
-| [ ]  | T05  | [Core：单元测试](tasks/T05-core-unit-tests.md)                            | T04              |          |
-| [ ]  | T06  | [React：Portal 组件](tasks/T06-react-portal.md)                           | T02              |          |
-| [ ]  | T07  | [React：状态机 + Hook](tasks/T07-react-hook.md)                           | T03, T04, T06    |          |
-| [ ]  | T08  | [React：AdaptiveHoverPanel 组件](tasks/T08-react-component.md)            | T06, T07         |          |
-| [ ]  | T09  | [React：样式系统](tasks/T09-react-styles.md)                              | T08              |          |
-| [ ]  | T10  | [React：集成测试](tasks/T10-react-integration-tests.md)                   | T08              |          |
-| [ ]  | T11  | [Playground 调试沙箱](tasks/T11-playground.md)                            | T08, T09         |          |
-| [ ]  | T12  | [Storybook 场景](tasks/T12-storybook.md)                                  | T11              |          |
-| [ ]  | T13  | [构建发布配置](tasks/T13-build-publish.md)                                | T08, T09, T10    |          |
+| [x]  | T02  | [公共配置（tsconfig/lint/format）](tasks/T02-shared-config.md)            | T01              | 2026-05-23 |
+| [x]  | T03  | [Core：类型 + 常量 + clamp](tasks/T03-core-types-utils.md)                | T02              | 2026-05-23 |
+| [x]  | T04  | [Core：calculateLayout 算法](tasks/T04-core-calculate-layout.md)          | T03              | 2026-05-23 |
+| [x]  | T05  | [Core：单元测试](tasks/T05-core-unit-tests.md)                            | T04              | 2026-05-23 |
+| [x]  | T06  | [React：Portal 组件](tasks/T06-react-portal.md)                           | T02              | 2026-05-23 |
+| [x]  | T07  | [React：状态机 + Hook](tasks/T07-react-hook.md)                           | T03, T04, T06    | 2026-05-23 |
+| [x]  | T08  | [React：AdaptiveHoverPanel 组件](tasks/T08-react-component.md)            | T06, T07         | 2026-05-23 |
+| [x]  | T09  | [React：样式系统](tasks/T09-react-styles.md)                              | T08              | 2026-05-23 |
+| [x]  | T10  | [React：集成测试](tasks/T10-react-integration-tests.md)                   | T08              | 2026-05-23 |
+| [x]  | T11  | [Playground 调试沙箱](tasks/T11-playground.md)                            | T08, T09         | 2026-05-23 |
+| [x]  | T12  | [Storybook 场景](tasks/T12-storybook.md)                                  | T11              | 2026-05-23 |
+| [x]  | T13  | [构建发布配置](tasks/T13-build-publish.md)                                | T08, T09, T10    | 2026-05-23 |
 
 ## 依赖关系图
 

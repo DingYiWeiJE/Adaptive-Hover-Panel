@@ -64,3 +64,10 @@ pnpm --filter @adaptive-hover/core typecheck
 ## 完成记录
 
 <!-- 完成后在此追加 -->
+
+### 2026-05-23
+
+- 严格按文档 6.2 / 6.3 节签名实现，无偏离。
+- `index.ts` 仅 re-export `types` / `clamp` / `constants`，未引入任何运行时副作用，未依赖 react / dom。
+- 验收：`pnpm --filter @adaptive-hover/core typecheck` 通过且无输出。
+- 跨包验证：在 `@adaptive-hover/react` 中临时建立 smoke 文件 `import { clamp, DEFAULT_OFFSET, type LayoutOptions } from '@adaptive-hover/core'` 通过 `tsc --noEmit`，验证后已删除。

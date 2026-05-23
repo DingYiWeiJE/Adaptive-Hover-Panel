@@ -1,0 +1,29 @@
+.ahp-panel {
+  position: fixed;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ahp-panel {
+    background: rgba(20, 20, 20, 0.45);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .ahp-panel {
+    background: rgba(255, 255, 255, 0.92);
+  }
+  @media (prefers-color-scheme: dark) {
+    .ahp-panel {
+      background: rgba(20, 20, 20, 0.95);
+    }
+  }
+}

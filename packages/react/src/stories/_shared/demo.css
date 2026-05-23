@@ -1,0 +1,136 @@
+.demo-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 96px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 500;
+  color: inherit;
+}
+
+[data-theme='dark'] .demo-trigger {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.demo-thumb {
+  width: 220px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: block;
+  cursor: pointer;
+}
+
+.preview-text {
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: inherit;
+}
+
+[data-theme='dark'] .preview-text {
+  color: #f5f5f5;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-card {
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: inherit;
+}
+
+.preview-card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.preview-card ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+[data-theme='dark'] .preview-card {
+  color: #f5f5f5;
+}
+
+.preview-detail {
+  padding: 16px;
+  font-size: 14px;
+  color: inherit;
+}
+
+.preview-detail h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.preview-detail dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 12px;
+}
+
+.preview-detail dt {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+[data-theme='dark'] .preview-detail {
+  color: #f5f5f5;
+}
+
+[data-theme='dark'] .preview-detail dt {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.demo-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.demo-table th,
+.demo-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .demo-table th,
+[data-theme='dark'] .demo-table td {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.demo-table tbody tr {
+  cursor: pointer;
+}
+
+.demo-table tbody tr:hover {
+  background: rgba(79, 70, 229, 0.08);
+}
+
+.dark-bg {
+  background: #0e0e12;
+  color: #f5f5f5;
+  padding: 48px;
+  border-radius: 12px;
+  min-width: 480px;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

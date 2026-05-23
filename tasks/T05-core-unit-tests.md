@@ -92,4 +92,15 @@ pnpm --filter @adaptive-hover/core test:coverage
 
 ## 完成记录
 
-<!-- 完成后在此追加 -->
+### 2026-05-23
+
+- 测试文件：`packages/core/src/clamp.test.ts`（7 个）+ `packages/core/src/calculateLayout.test.ts`（14 个）= **21 个测试全部通过**
+- 覆盖率（v8，`pnpm --filter @adaptive-hover/core test:coverage`）：
+  - Statements: 100% (16/16)
+  - Branches:   100% (18/18)
+  - Functions:  100% (2/2)
+  - Lines:      100% (16/16)
+- 偏离/备注：
+  - 中线测试严格按 T04 实现的 `>`（非 `>=`）语义断言：`mouseX === viewportWidth/2` 走 `'right'` 分支、`mouseY === viewportHeight/2` 走 `'bottom'` 分支
+  - 极小视口兜底用 `viewport: 320×240 + mouseX/Y: 200/130`，进入 `'left'/'top'` 分支后 raw 值远小于 min，验证 `Math.max(margin, …)` 兜底将 `left/top` 钳到 `margin = 12`
+  - vitest 选用最新稳定版 `^4.1.7`（`vitest` + `@vitest/coverage-v8`），与文档要求一致

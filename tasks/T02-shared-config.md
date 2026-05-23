@@ -88,4 +88,29 @@ pnpm format:check
 
 ## 完成记录
 
-<!-- 完成后在此追加 -->
+### 2026-05-23
+
+偏离决定：
+
+- 根 `package.json` 增加 `"type": "module"`，让 `eslint.config.js` 以 ESM 解析（消除 Node 的 `MODULE_TYPELESS_PACKAGE_JSON` 警告）。
+- 新增 `.prettierignore`，忽略 `node_modules/` `dist/` `coverage/` `.turbo/` `pnpm-lock.yaml` 与所有 `**/*.md`。任务文档与 README 是用户撰写内容，不应被本任务的格式化改写。
+- 在三个 package 的 `src/` 各放一个占位 `index.ts`（内容仅 `export {}`），避免 `tsc --noEmit` 在 `include: ["src"]` 匹配不到任何输入文件时报 TS18003。这些占位会在 T03 / T06 被真实代码替换。
+- ESLint 扁平配置使用 `typescript-eslint` 的 `configs.recommended` 作为基础，并在 `*.{ts,tsx}` 上启用 `react`、`react-hooks/rules-of-hooks`、`react-hooks/exhaustive-deps`。
+
+验收命令输出：
+
+```
+=== pnpm typecheck ===
+> pnpm -r typecheck
+packages/core typecheck: Done
+playground typecheck: Done
+packages/react typecheck: Done
+
+=== pnpm lint ===
+> eslint .
+（无输出，0 错误 0 警告）
+
+=== pnpm format:check ===
+> prettier --check .
+All matched files use Prettier code style!
+```

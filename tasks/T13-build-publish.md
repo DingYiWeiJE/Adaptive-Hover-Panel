@@ -179,4 +179,42 @@ pnpm publish --dry-run --filter @adaptive-hover/react
 
 ## 完成记录
 
-<!-- 完成后在此追加 -->
+**完成日期**：2026-05-23
+
+### 关键改动
+
+- `packages/core/package.json`：移除 `private`，`exports` 指向 `dist/`，新增 `files`、`tsup` 脚本、`tsup` 配置
+- `packages/react/package.json`：移除 `private`，`exports` 增加 `./styles.css` 子路径，新增 `files`、`tsup` 脚本、`tsup` 配置
+- 新增 `tsup` 作为两个包的 devDependency；`build` 脚本改为 `tsup`
+- 根 `package.json`：补 `build`、`pack:dry`、`release` 等脚本；新增 `@changesets/cli`
+- 新增 `.changeset/config.json`（changesets 默认配置）
+- 新增 `.github/workflows/ci.yml`（pnpm + Node 20 矩阵：install / typecheck / lint / test / build）
+- 新增根 `README.md`（按文档第 13 节，含安装、用法、API、暗色模式、四象限、贡献）
+- 新增 `LICENSE`（MIT，© 2026 Evay）
+
+### 构建产物
+
+`packages/core/dist`：
+- `index.js` 1.4 KB / `index.cjs` 2.6 KB
+- `index.d.ts` / `index.d.cts` 各 1.1 KB
+- 配套 `.map`
+
+`packages/react/dist`：
+- `index.js` 8.6 KB / `index.cjs` 10.2 KB
+- `index.d.ts` / `index.d.cts` 各 1.8 KB
+- `styles.css` 671 B
+- 配套 `.map`
+
+### 验收
+
+```text
+pnpm typecheck   → core / react / playground 全部 Done
+pnpm -r test     → core 21 passed, react 8 passed (合计 29)
+pnpm build       → tsup core + tsup react 全部成功
+pnpm pack:dry    → 仅打包 dist/ + package.json + README + LICENSE，无 src/test
+pnpm publish --dry-run --filter @adaptive-hover/core   → OK
+pnpm publish --dry-run --filter @adaptive-hover/react  → OK
+```
+
+未实际执行 `pnpm publish`（按任务要求只做 dry-run）。
+

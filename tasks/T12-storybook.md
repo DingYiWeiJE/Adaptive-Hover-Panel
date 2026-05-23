@@ -63,4 +63,38 @@ pnpm storybook:build
 
 ## 完成记录
 
-<!-- 完成后在此追加 -->
+完成日期：2026-05-23
+
+### Storybook 配置
+
+- `packages/react/.storybook/main.ts`：`@storybook/react-vite` framework + `addon-essentials` + `addon-themes`，`disableTelemetry`
+- `packages/react/.storybook/preview.ts`：导入 `'../src/styles.css'` 和 `'./preview.css'`，`parameters.layout: 'centered'`，`withThemeByDataAttribute` 装饰器（通过 `data-theme` 切 light/dark）
+- `packages/react/.storybook/preview.css`：暗色背景 + `[data-theme='dark'] .ahp-panel` 兜底
+- `packages/react/.storybook/tsconfig.json`：复用 `packages/react/tsconfig.json`
+
+### Story 列表（6 个）
+
+- `src/stories/Basic.stories.tsx` — 单按钮 + 简单文字 panel
+- `src/stories/LargeContent.stories.tsx` — 富文本卡片（标题 + 多段落 + 列表）
+- `src/stories/ImagePreview.stories.tsx` — 4 张缩略图 hover 显示大图
+- `src/stories/TablePreview.stories.tsx` — 5 行表格 hover 显示详情卡
+- `src/stories/EdgeCases.stories.tsx` — 4 个 `position: fixed` 钉在视口四角的 trigger，验证四象限自适应（`layout: 'fullscreen'`）
+- `src/stories/DarkMode.stories.tsx` — 暗色容器 + 默认 `theme: dark`，毛玻璃效果验证
+- `src/stories/_shared/demo.css` — 共享样式（`demo-trigger` / `demo-thumb` / `preview-*` / `dark-bg`）
+- `src/stories/_shared/css.d.ts` — `*.css` side-effect 类型声明
+
+### 脚本
+
+- `packages/react/package.json` 新增 `storybook` / `build-storybook`
+- 根 `package.json` 新增 `storybook` / `storybook:build`（代理到 react 包）
+
+### 验收
+
+- `pnpm storybook` → http://localhost:6006/ 200 OK，6 个 story 全部识别
+- `pnpm storybook:build` → 产出 `packages/react/storybook-static/`（含 `index.html` / `iframe.html` / `assets/`）
+- `pnpm -r typecheck` 全绿
+- DarkMode 通过工具栏 theme 切换 `data-theme` 属性，触发 `preview.css` 中的暗色面板样式
+
+### 构建产物路径
+
+`packages/react/storybook-static/`

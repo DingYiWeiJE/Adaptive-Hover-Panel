@@ -92,4 +92,44 @@ T08 已完成。
 
 ## 完成记录
 
-<!-- 完成后在此追加 -->
+### 2026-05-23
+
+**交付物落地**
+
+- `packages/react/src/styles.css`：按文档第 9 节样例 + 任务样例落地。
+  - 基础规则：`position: fixed` + 圆角 12px + 半透明白底 (alpha 0.25) + `backdrop-filter: blur(18px)`（含 `-webkit-` 前缀）+ 边框 + 阴影 + `overflow: hidden` + `box-sizing: border-box`。
+  - `@media (prefers-color-scheme: dark)`：背景切换为半透明深色 `rgba(20,20,20,0.45)`，边框降透明度。
+  - `@supports not (backdrop-filter: blur(1px))`：兜底背景提到 alpha 0.92（亮）/ 0.95（暗）；`@supports` 内嵌 `@media`，与文档第 9.2 节 / 任务模板的层级一致（`@supports` 在外、`@media` 在内）。
+- `packages/react/package.json`：
+  - 新增 `exports`：`"."` 暂指向 `./src/index.ts`（T13 改为 dist），`"./styles.css"` 指向 `./src/styles.css`（源码阶段必须指向 src，否则 playground 引入会找不到）。
+  - 新增 `sideEffects: ["**/*.css"]`，避免打包工具把 css import 当无副作用 tree-shake 掉。
+- `README.md`：追加临时备注，提示使用方手动 `import '@adaptive-hover/react/styles.css'`（T13 整理）。
+
+**约束自检**
+
+- 未引入任何 CSS-in-JS 运行时；纯静态 CSS 文件。
+- 未使用 CSS Modules；类名直接为 `.ahp-panel`，便于用户覆盖。
+- 类名前缀统一 `ahp-`。
+
+**typecheck 输出（pnpm -r typecheck）**
+
+```
+Scope: 3 of 4 workspace projects
+playground typecheck$ tsc --noEmit
+packages/core typecheck$ tsc --noEmit
+playground typecheck: Done
+packages/core typecheck: Done
+packages/react typecheck$ tsc --noEmit
+packages/react typecheck: Done
+```
+
+**手测验证（待 T11 playground 搭好后由用户在浏览器执行）**
+
+T11 尚未完成，playground 目前只有空的 `src/index.ts` 占位，无法在本任务内启动 Vite + 真实 DOM 验证三种状态。本任务仅交付样式文件与 package 配置，建议在 T11 完成后按以下步骤补一次手测并把截图回填到这里：
+
+1. 在 playground 入口 `import '@adaptive-hover/react/styles.css'`，渲染一个 `.ahp-panel`。
+2. 默认浅色：DevTools 看 Computed，`background-color` 应为 `rgba(255,255,255,0.25)`，`backdrop-filter` 为 `blur(18px)`。
+3. 切系统暗色（或 DevTools → Rendering → "Emulate CSS media feature prefers-color-scheme: dark"）：`background-color` 应变为 `rgba(20,20,20,0.45)`。
+4. 验证降级：DevTools → 三个点菜单 → More tools → Rendering → 找到 "Emulate CSS media feature" 区下方的 "Disable CSS property"，添加 `backdrop-filter: none`（或在 Sources 里临时改 UA stylesheet）；亦可直接用一个不支持 `backdrop-filter` 的环境（旧 Firefox / 关闭硬件加速的 Edge 兜底通道）。此时浅色应回退到 `rgba(255,255,255,0.92)`，暗色应回退到 `rgba(20,20,20,0.95)`。
+
+> 备注：T11 完成后请把三张截图（浅色 / 暗色 / 降级）粘到本节末尾完成存证。
