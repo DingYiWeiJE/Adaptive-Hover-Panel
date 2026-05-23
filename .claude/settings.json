@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install *)",
+      "Bash(pnpm -r exec node -e \"console.log\\(process.cwd\\(\\)\\)\")",
+      "Bash(pnpm why *)"
+    ]
+  }
+}
