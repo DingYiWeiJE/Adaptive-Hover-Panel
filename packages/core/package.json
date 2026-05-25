@@ -2,6 +2,14 @@
   "name": "@adaptive-hover/core",
   "version": "0.0.0",
   "description": "Layout algorithm core for Adaptive Hover Panel — viewport-aware positioning logic, framework-agnostic.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DingYiWeiJE/Adaptive-Hover-Panel.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/DingYiWeiJE/Adaptive-Hover-Panel#readme",
+  "bugs": "https://github.com/DingYiWeiJE/Adaptive-Hover-Panel/issues",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

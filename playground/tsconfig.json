@@ -2,7 +2,11 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "paths": {
+      "@adaptive-hover/react": ["../packages/react/src/index.ts"],
+      "@adaptive-hover/core": ["../packages/core/src/index.ts"]
+    }
   },
   "include": ["src"]
 }

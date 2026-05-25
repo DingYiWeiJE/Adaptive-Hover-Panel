@@ -12,6 +12,7 @@ export default [
       '**/dist/**',
       '**/node_modules/**',
       '**/coverage/**',
+      '**/storybook-static/**',
     ],
   },
   js.configs.recommended,
