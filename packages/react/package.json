@@ -1,7 +1,15 @@
 {
   "name": "@adaptive-hover/react",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Adaptive Hover Panel for React — viewport-aware hover panel that auto-flips to stay on-screen.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DingYiWeiJE/Adaptive-Hover-Panel.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/DingYiWeiJE/Adaptive-Hover-Panel#readme",
+  "bugs": "https://github.com/DingYiWeiJE/Adaptive-Hover-Panel/issues",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
