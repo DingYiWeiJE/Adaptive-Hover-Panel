@@ -1,7 +1,6 @@
 import {
   useCallback,
   useEffect,
-  useMemo,
   useReducer,
   useRef,
   useState,
@@ -97,12 +96,11 @@ export function useAdaptiveHoverPanel(
   } = options
 
   const [state, dispatch] = useReducer(reducer, 'IDLE' as PanelState)
-  const [mouse, setMouse] = useState({ x: 0, y: 0 })
   const [viewport, setViewport] = useState(getInitialViewport)
+  const [frozenLayout, setFrozenLayout] = useState<LayoutResult | null>(null)
 
   const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const rafIdRef = useRef<number | null>(null)
   const pendingMouseRef = useRef({ x: 0, y: 0 })
 
   const clearOpenTimer = useCallback(() => {
@@ -116,13 +114,6 @@ export function useAdaptiveHoverPanel(
     if (closeTimerRef.current != null) {
       clearTimeout(closeTimerRef.current)
       closeTimerRef.current = null
-    }
-  }, [])
-
-  const clearRaf = useCallback(() => {
-    if (rafIdRef.current != null) {
-      cancelAnimationFrame(rafIdRef.current)
-      rafIdRef.current = null
     }
   }, [])
 
@@ -167,21 +158,16 @@ export function useAdaptiveHoverPanel(
     }
   }, [])
 
-  useEffect(() => clearRaf, [clearRaf])
-
-  const flushMouse = useCallback(() => {
-    rafIdRef.current = null
-    setMouse(pendingMouseRef.current)
-  }, [])
-
   const handleMouseMove = useCallback(
     (e: MouseEvent<HTMLElement>) => {
+      console.log('%c Ding 🚀🚀🚀', 'color: white; background: linear-gradient(135deg, #00c853, #64dd17); padding: 6px 12px; border-radius: 8px; font-size: 14px; font-weight: bold; text-shadow: 0 1px 2px rgba(0,0,0,0.3);', 
+        '正在移动'
+      );
+      
       if (disabled) return
       pendingMouseRef.current = { x: e.clientX, y: e.clientY }
-      if (rafIdRef.current != null) cancelAnimationFrame(rafIdRef.current)
-      rafIdRef.current = requestAnimationFrame(flushMouse)
     },
-    [disabled, flushMouse]
+    [disabled]
   )
 
   const onTriggerEnter = useCallback(() => {
@@ -215,25 +201,29 @@ export function useAdaptiveHoverPanel(
 
   const visible = state === 'OPEN' || state === 'PENDING_CLOSE'
 
-  const layout = useMemo<LayoutResult | null>(() => {
-    if (!visible) return null
-    if (viewport.w === 0 || viewport.h === 0) return null
-    return calculateLayout({
-      mouseX: mouse.x,
-      mouseY: mouse.y,
-      viewportWidth: viewport.w,
-      viewportHeight: viewport.h,
-      offset,
-      margin,
-      minWidth,
-      minHeight,
-      maxWidth,
-      maxHeight,
+  useEffect(() => {
+    if (!visible) {
+      setFrozenLayout(null)
+      return
+    }
+    setFrozenLayout((prev) => {
+      if (prev) return prev
+      if (viewport.w === 0 || viewport.h === 0) return null
+      return calculateLayout({
+        mouseX: pendingMouseRef.current.x,
+        mouseY: pendingMouseRef.current.y,
+        viewportWidth: viewport.w,
+        viewportHeight: viewport.h,
+        offset,
+        margin,
+        minWidth,
+        minHeight,
+        maxWidth,
+        maxHeight,
+      })
     })
   }, [
     visible,
-    mouse.x,
-    mouse.y,
     viewport.w,
     viewport.h,
     offset,
@@ -243,6 +233,8 @@ export function useAdaptiveHoverPanel(
     maxWidth,
     maxHeight,
   ])
+
+  const layout = frozenLayout
 
   const triggerProps: HTMLAttributes<HTMLElement> = {
     onMouseEnter: onTriggerEnter,
