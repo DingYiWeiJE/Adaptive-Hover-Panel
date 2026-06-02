@@ -10,7 +10,7 @@ import { FloatingPanel } from './FloatingPanel'
 
 export interface AdaptiveHoverPanelProps {
   children: ReactNode
-  panel: ReactNode
+  panel: ReactNode | (() => ReactNode)
   delay?: number
   closeDelay?: number
   offset?: number
@@ -108,7 +108,7 @@ export function AdaptiveHoverPanel(props: AdaptiveHoverPanelProps) {
             className={panelClassName}
             {...panelProps}
           >
-            {panel}
+            {typeof panel === 'function' ? panel() : panel}
           </FloatingPanel>
         </Portal>
       )}
